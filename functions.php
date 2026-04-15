@@ -914,3 +914,36 @@ function ds_change_readmore_text( $translated_text, $text, $domain ) {
  * Remove related products output
  */
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
+/**
+ * Drop empty core/quote blocks (e.g. &lt;blockquote class="wp-block-quote"&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;).
+ */
+function dwm_lnb_strip_empty_core_quote_block( $block_content, $block ) {
+	if ( ! is_array( $block ) || empty( $block['blockName'] ) || 'core/quote' !== $block['blockName'] ) {
+		return $block_content;
+	}
+	$text = wp_strip_all_tags( $block_content );
+	if ( '' === trim( $text ) ) {
+		return '';
+	}
+	return $block_content;
+}
+add_filter( 'render_block', 'dwm_lnb_strip_empty_core_quote_block', 10, 2 );
+
+/**
+ * Remove empty quote markup in post content (legacy HTML / edge cases).
+ */
+function dwm_lnb_strip_empty_wp_block_quote_html( $content ) {
+	if ( is_admin() || false === strpos( $content, 'wp-block-quote' ) ) {
+		return $content;
+	}
+	return preg_replace_callback(
+		'/<blockquote\b[^>]*\bwp-block-quote\b[^>]*>.*?<\/blockquote>/is',
+		static function ( $m ) {
+			$text = wp_strip_all_tags( $m[0] );
+			return ( '' === trim( $text ) ) ? '' : $m[0];
+		},
+		$content
+	);
+}
+add_filter( 'the_content', 'dwm_lnb_strip_empty_wp_block_quote_html', 20 );
