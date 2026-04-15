@@ -12,6 +12,9 @@ Template Name: Alteration Page
 	$alteration_button_link_title = get_field( "alteration_button_link_title", 30 );
 	$alteration_button_link_url = get_field( "alteration_button_link_url", 30 );
 	$alternation_content_title = get_field( "alternation_content_title", 30 );
+	$quote_section_title = get_field( "quote_section_title", 30 );
+	$quote_text = get_field( "quote_text", 30 );
+	$quote_signature = get_field( "quote_signature", 30 );
 	
 	/*-----Alteration Icon Fields-----*/
 	$first_icon = get_field( "1st_icon", 30 );
@@ -99,7 +102,7 @@ Template Name: Alteration Page
 		<div class="container">
 			<h2 class="alternation_content_title"><?=$alternation_content_title?></h2>
 			<div class="alternation_text">
-				<?=the_content();?>
+				<?php the_content(); ?>
 			</div>
 		</div>
 	</section>

@@ -1,0 +1,15 @@
+{
+  "name": "dwm-lnb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "lessc --compress css/app.less css/app.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "less": "^4.6.4"
+  }
+}

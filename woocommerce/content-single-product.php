@@ -7,7 +7,7 @@
  * HOWEVER, on occasion WooCommerce will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
  * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
+ * happen. When this occurs, the version of the template file will be bumped and
  * the readme will list any important changes.
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
@@ -31,11 +31,6 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <div class="row">
 <div class="col-md-12">
 
@@ -91,22 +86,23 @@ if ( post_password_required() ) {
 <div class="row">
 <div class="col-md-12 single_main_wrapper">
 	<div class="owl-carousel owl-theme">
-	<?php if( have_rows('product_videos') ): ?>
-						<?php 
-						$counter=1;
-						while( have_rows('product_videos') ): the_row(); 
-							$video = get_sub_field('video');
-							$year = get_sub_field('year');?>
+	<?php if ( have_rows( 'product_videos' ) ) : ?>
+						<?php
+						while ( have_rows( 'product_videos' ) ) :
+							the_row();
+							$video     = get_sub_field( 'video' );
+							$video_url = is_array( $video ) && ! empty( $video['url'] ) ? $video['url'] : '';
+							?>
 									 <div class="item">
 											<video width="100%" height="500" controls>
-											  <source src="<?php echo $video['url']; ?>" type="video/mp4">
+											  <?php if ( $video_url ) : ?>
+											  <source src="<?php echo esc_url( $video_url ); ?>" type="video/mp4">
+											  <?php endif; ?>
 											  <source src="movie.ogg" type="video/ogg">
 														Your browser does not support the video tag.
 											</video>
 									 </div> 
-						<?php $counter++;
-						
-						endwhile; ?>
+						<?php endwhile; ?>
 						<?php endif; ?>
     
 </div>
@@ -116,21 +112,3 @@ if ( post_password_required() ) {
 </div>
 
 <?php do_action( 'woocommerce_after_single_product' ); ?>
-<script>
-$('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:1
-        },
-        1000:{
-            items:1
-        }
-    }
-})
-</script>

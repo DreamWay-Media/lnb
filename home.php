@@ -2,100 +2,131 @@
 /*
 Template Name: Home page
 */
-?>
-<?php
+if ( is_home() && ! is_front_page() ) {
+	get_template_part( 'template-parts/blog', 'archive' );
+	return;
+}
+
+	$acf_home_id = dwm_lnb_home_acf_page_id();
+
 	/*-----Services Section-----*/
-	$services_title = get_field( "services_title", 68 );
-	$services_description = get_field( "services_description", 68 );
-	$left_service_image = get_field( "left_service_image", 68 );
-	$left_service_title = get_field( "left_service_title", 68 );
-	$left_service_desc = get_field( "left_service_desc", 68 );
-	$middle_service_image = get_field( "middle_service_image", 68 );
-	$middle_service_title = get_field( "middle_service_title", 68 );
-	$middle_service_desc = get_field( "middle_service_desc", 68 );
-	$right_service_image = get_field( "right_service_image", 68 );
-	$right_service_title = get_field( "right_service_title", 68 );
-	$right_service_desc = get_field( "right_service_desc", 68 );
-	
+	$services_title         = dwm_lnb_get_field( 'services_title', $acf_home_id );
+	$services_description   = dwm_lnb_get_field( 'services_description', $acf_home_id );
+	$left_service_image     = dwm_lnb_get_field( 'left_service_image', $acf_home_id );
+	$left_service_title     = dwm_lnb_get_field( 'left_service_title', $acf_home_id );
+	$left_service_desc      = dwm_lnb_get_field( 'left_service_desc', $acf_home_id );
+	$middle_service_image   = dwm_lnb_get_field( 'middle_service_image', $acf_home_id );
+	$middle_service_title   = dwm_lnb_get_field( 'middle_service_title', $acf_home_id );
+	$middle_service_desc    = dwm_lnb_get_field( 'middle_service_desc', $acf_home_id );
+	$right_service_image    = dwm_lnb_get_field( 'right_service_image', $acf_home_id );
+	$right_service_title    = dwm_lnb_get_field( 'right_service_title', $acf_home_id );
+	$right_service_desc     = dwm_lnb_get_field( 'right_service_desc', $acf_home_id );
+
 	/*-----About Section-----*/
-	$about_title_line_1 = get_field( "about_title_line_1", 68 );
-	$about_title_line_2 = get_field( "about_title_line_2", 68 );
-	$about_desc = get_field( "about_desc", 68 );
-	$about_background = get_field( "about_background", 68 );
-	$about_link_title = get_field( "about_link_title", 68 );
-	$about_link_url = get_field( "about_link_url", 68 );
-	
+	$about_title_line_1 = dwm_lnb_get_field( 'about_title_line_1', $acf_home_id );
+	$about_title_line_2 = dwm_lnb_get_field( 'about_title_line_2', $acf_home_id );
+	$about_desc         = dwm_lnb_get_field( 'about_desc', $acf_home_id );
+	$about_background   = dwm_lnb_get_field( 'about_background', $acf_home_id );
+	$about_link_title   = dwm_lnb_get_field( 'about_link_title', $acf_home_id );
+	$about_link_url     = dwm_lnb_get_field( 'about_link_url', $acf_home_id );
+
 	/*-----Contact Section-----*/
-	$contact_title = get_field( "contact_title", 68 );
-	$contact_description = get_field( "contact_description", 68 );
-	$contact_form_shortcode = get_field( "contact_form_shortcode", 68 );
-	$contact_background = get_field( "contact_background", 68 );
-	$contact_map_shortcode = get_field( "contact_map_shortcode", 68 );
-	
+	$contact_title          = dwm_lnb_get_field( 'contact_title', $acf_home_id );
+	$contact_description    = dwm_lnb_get_field( 'contact_description', $acf_home_id );
+	$contact_form_shortcode = dwm_lnb_get_field( 'contact_form_shortcode', $acf_home_id );
+	$contact_background     = dwm_lnb_get_field( 'contact_background', $acf_home_id );
+	$contact_map_shortcode    = dwm_lnb_get_field( 'contact_map_shortcode', $acf_home_id );
+
 	/*-----Products Section-----*/
-	$products_title = get_field( "products_title", 68 );
-	$products_desc = get_field( "products_desc", 68 );
-	$products_shortcode = get_field( "products_shortcode", 68 );
-	
-	
+	$products_title       = dwm_lnb_get_field( 'products_title', $acf_home_id );
+	$products_desc        = dwm_lnb_get_field( 'products_desc', $acf_home_id );
+	$products_shortcode   = dwm_lnb_get_field( 'products_shortcode', $acf_home_id );
 ?>
 <?php get_header('home'); ?>
 <main id="homepage" class="homepage">
+	<?php
+	$slider = new WP_Query(
+		array(
+			'post_type'      => 'slider',
+			'posts_per_page' => 3,
+			'post_status'    => 'publish',
+			'no_found_rows'  => true,
+		)
+	);
+	$slider_title      = '';
+	$slider_text       = '';
+	$slider_link_title = '';
+	$slider_link_url   = '';
+	if ( $slider->have_posts() ) {
+		$slider->the_post();
+		$slider_title      = get_the_title();
+		$slider_text       = apply_filters( 'the_content', get_the_content() );
+		$slider_link_title = dwm_lnb_get_field( 'slide_link_title' );
+		$slider_link_url   = dwm_lnb_get_field( 'slide_link_url' );
+		$slider->rewind_posts();
+	}
+	$flower_img_base = get_stylesheet_directory_uri() . '/imgs';
+	?>
 	<section class="hero-section">
 		<div class="row">
 		  <div class="col-12">
 			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 			  <div class="carousel-inner">
-				  <?php $slider_content = new WP_Query( array( 'post_type' => 'slider', 'posts_per_page' => 1 ) );
-				  $slider_content->the_post();
-					
-				  $slider_title = get_the_title();
-				  $slider_text = get_the_content();
-				  $slider_link_title = get_field( "slide_link_title", $slider_content->ID );
-				  $slider_link_url =  get_field( "slide_link_url", $slider_content->ID );
-				  ?>
-				  
-				<?php $slider = new WP_Query( array( 'post_type' => 'slider', 'posts_per_page' => 3 ) ); ?>
 				<?php
-				$counter = 0;
-				while ( $slider->have_posts() ) : $slider->the_post();
-					$counter++;
-				?>
-					<div class="carousel-item <?=($counter == 1) ? 'active' : ''?>">
-						<div class="img-container" style="background-image:url(<?php echo wp_get_attachment_url(get_post_thumbnail_id($slider->ID)); ?>)">
-							
-						</div>
+				$slide_i = 0;
+				while ( $slider->have_posts() ) :
+					$slider->the_post();
+					++$slide_i;
+					$bg = wp_get_attachment_url( get_post_thumbnail_id() );
+					?>
+					<div class="carousel-item <?php echo ( 1 === $slide_i ) ? 'active' : ''; ?>">
+						<div class="img-container" style="background-image:url(<?php echo $bg ? esc_url( $bg ) : ''; ?>)"></div>
 					</div>
-					<?php endwhile; wp_reset_query(); ?>
+					<?php
+				endwhile;
+				if ( $slide_i > 0 ) {
+					$slider->rewind_posts();
+				}
+				?>
 				  <div class="container full-height">
 								<div class="slide_content">
 									<div class="title">
-										 <?=$slider_title; ?>
+										 <?php echo wp_kses_post( $slider_title ); ?>
 									</div>
 									<div class="desc">
-										<?=$slider_text;?>
+										<?php echo wp_kses_post( $slider_text ); ?>
 									</div>
 									<div class="btn default">
-										<a href="<?=$slider_link_url;?>"><?=$slider_link_title;?></a>
+										<a href="<?php echo esc_url( $slider_link_url ); ?>"><?php echo esc_html( $slider_link_title ); ?></a>
 									</div>
 								</div>
 							</div>	
 			  </div>
-				<?php if( $slider->have_posts()): $counter = 0; ?>
+				<?php
+				if ( $slider->have_posts() ) :
+					$ind = 0;
+					?>
 				<div class="carousel-indicators">
-					  <?php while ($slider->have_posts()): $slider->the_post(); ?>
-					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo $counter; ?>" class="<?php if($counter == 0) echo 'active'; ?>" aria-current="true" aria-label="Slide <?=$counter?>"></button>
+					  <?php
+						while ( $slider->have_posts() ) :
+							$slider->the_post();
+							?>
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo (int) $ind; ?>" class="<?php echo 0 === $ind ? 'active' : ''; ?>" aria-current="<?php echo 0 === $ind ? 'true' : 'false'; ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Slide %d', 'dwm-lnb' ), $ind + 1 ) ); ?>"></button>
 
-				<?php $counter++; endwhile; ?>
+				<?php
+						++$ind;
+					endwhile;
+					?>
 				</div>
-			<?php endif; ?> 
+			<?php endif; ?>
+			<?php wp_reset_postdata(); ?>
 			</div>
 		  </div>
 		</div>
     </section>
 	<section class="service-section">
-		<div class="flower_left"><img src="https://dev.lovenbride.com/wp-content/themes/dreamway/imgs/flower_left.png"></div>
-		<div class="flower_right"><img src="https://dev.lovenbride.com/wp-content/themes/dreamway/imgs/flower_right.png"></div>
+		<div class="flower_left"><img src="<?php echo esc_url( $flower_img_base . '/flower_left.png' ); ?>" alt="" loading="lazy" decoding="async" /></div>
+		<div class="flower_right"><img src="<?php echo esc_url( $flower_img_base . '/flower_right.png' ); ?>" alt="" loading="lazy" decoding="async" /></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-12 text-center">
@@ -173,9 +204,9 @@ Template Name: Home page
 			</div>
 		</div>
 	</section>
-	
-	
-	
+
+	<?php get_template_part( 'template-parts/home', 'blog-carousel' ); ?>
+
 	<section class="instagram-section">
 	    <div class="container">
 	        <div class="row">
