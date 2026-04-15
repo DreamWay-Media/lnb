@@ -33,13 +33,15 @@ Template Name: Booking Page
 	$service_6_image = get_field( "service_6_image", 236 );
 	$service_6_title = get_field( "service_6_title", 236 );
 	$service_6_desc = get_field( "service_6_desc", 236 );
-	
+
+	$flower_img_base = get_stylesheet_directory_uri() . '/imgs';
+
 ?>
 <?php get_header('home'); ?>
 <main id="booking" class="bookingpage">
 	<section class="content booking-section">
-		    <div class="flower_left"><img src="https://dev.lovenbride.com/wp-content/themes/dreamway/imgs/flower_left.png"></div>
-		    <div class="flower_right"><img src="https://dev.lovenbride.com/wp-content/themes/dreamway/imgs/flower_right.png"></div>
+		    <div class="flower_left"><img src="<?php echo esc_url( $flower_img_base . '/flower_left.png' ); ?>" alt="" loading="lazy" decoding="async" /></div>
+		    <div class="flower_right"><img src="<?php echo esc_url( $flower_img_base . '/flower_right.png' ); ?>" alt="" loading="lazy" decoding="async" /></div>
 		<div class="container">
 				<div class="booking-header">
 				    <h3 class="about_title_line_1">Hello Beautiful</h3><br>
@@ -77,8 +79,8 @@ if ( $products_query->have_posts() ) {
         ?>
         <div class="booking-option col-lg-4 col-sm-12">
             <div class="booking-holder">
-        <?
-        
+        <?php
+
         if ( $featured_image_url ) {
             echo '<img src="' . $featured_image_url . '">';
         }

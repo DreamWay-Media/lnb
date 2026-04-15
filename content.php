@@ -7,8 +7,8 @@ Template Name: Blog Content Page
 <main class="blog-content-page g-page" id="blog-listin-page">
    <section class="main-content">
        
-		    <div class="flower_left"><img src="https://dev.lovenbride.com/wp-content/themes/dreamway/imgs/flower_left.png"></div>
-		    <div class="flower_right"><img src="https://dev.lovenbride.com/wp-content/themes/dreamway/imgs/flower_right.png"></div>
+		    <div class="flower_left"><img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/imgs/flower_left.png' ); ?>" alt="" loading="lazy" decoding="async" /></div>
+		    <div class="flower_right"><img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/imgs/flower_right.png' ); ?>" alt="" loading="lazy" decoding="async" /></div>
      <div class="container">
          <div class="content-wrapper">
            <?php the_content(); ?>

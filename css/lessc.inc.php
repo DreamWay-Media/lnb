@@ -1209,7 +1209,7 @@ class lessc {
 					$name = $name . ": ";
 				}
 
-				$this->throwError("${name}expecting $expectedArgs arguments, got $numValues");
+				$this->throwError( "{$name}expecting $expectedArgs arguments, got $numValues" );
 			}
 
 			return $values;

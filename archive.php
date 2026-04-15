@@ -1,7 +1,34 @@
 <?php
-/*
-Template Name: Archive Page
-*/
+/**
+ * Recipes archive (legacy layout). Post category/tag archives use template-parts/blog-archive.php
+ * via category.php / tag.php / template_include — not this markup.
+ */
+// Post category/tag archives: use blog layout (this file is also the generic archive fallback).
+if ( function_exists( 'dwm_lnb_is_blog_category_or_tag_archive' ) && dwm_lnb_is_blog_category_or_tag_archive() ) {
+	$tpl = locate_template( 'template-parts/blog-archive.php', false, false );
+	if ( $tpl ) {
+		load_template( $tpl, false );
+		return;
+	}
+}
+
+$paged = (int) get_query_var( 'paged' );
+if ( $paged < 1 ) {
+	$paged = (int) get_query_var( 'page' );
+}
+if ( $paged < 1 ) {
+	$paged = 1;
+}
+$ppp   = max( 1, (int) get_option( 'posts_per_page', 12 ) );
+
+$recipes_query = new WP_Query(
+	array(
+		'post_type'      => 'post',
+		'posts_per_page' => $ppp,
+		'paged'          => $paged,
+		'post_status'    => 'publish',
+	)
+);
 ?>
 <?php get_header(); ?>
 <main id="recipes">
@@ -14,8 +41,8 @@ Template Name: Archive Page
         <div class="col-12 text-center">
 		<div class="breadcrumb-container">
           <?php
-			if ( function_exists('yoast_breadcrumb') ) {
-			  yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+			if ( function_exists( 'yoast_breadcrumb' ) ) {
+				yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' );
 			}
 			?>
         </div>
@@ -28,25 +55,53 @@ Template Name: Archive Page
 		<div class="container">
 			<div class="row blog_posts">
 				<div class="col-lg-12">
-				<?php $blog_posts = get_posts(array('post_type' => 'post', 'numberposts' => -1)); ?>
-					<?php foreach ($blog_posts as $blog_post):
-						 $parent_page_id = get_the_ID(); ?>
+				<?php
+				if ( $recipes_query->have_posts() ) :
+					while ( $recipes_query->have_posts() ) :
+						$recipes_query->the_post();
+						$thumb = get_post_thumbnail_id();
+						?>
 						 <div class="col-12 col-md-6 col-lg-4 recipe-item">
 							 <div class="recipe-wrapper">
 								<div class="img-container">
-									 <img src="<?php echo wp_get_attachment_url(get_post_thumbnail_id($blog_post->ID)); ?>">
+									 <?php if ( $thumb ) : ?>
+									 <img src="<?php echo esc_url( wp_get_attachment_url( $thumb ) ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>">
+									 <?php endif; ?>
 								</div>
 								<div class="recipe-info">
-									<h2 class="title"><?php echo get_the_title($blog_post->ID); ?></h2>
-									<p class="desc"><?php echo get_the_excerpt($blog_post->ID); ?></p> 
+									<h2 class="title"><?php the_title(); ?></h2>
+									<p class="desc"><?php echo esc_html( get_the_excerpt() ); ?></p> 
 								</div>
 								 <div class="readmore">
-									<a class="btn" href="<?php echo get_the_permalink($blog_post->ID); ?>">view recipe</a>								 
+									<a class="btn" href="<?php the_permalink(); ?>">view recipe</a>								 
 								 </div>								 
 							 </div>
 						</div>
-				<?php endforeach; ?>
+						<?php
+					endwhile;
+					wp_reset_postdata();
+				else :
+					echo '<p class="col-12">' . esc_html__( 'No recipes found.', 'dwm-lnb' ) . '</p>';
+				endif;
+				?>
 				</div>
+				<?php
+				if ( $recipes_query->max_num_pages > 1 ) {
+					echo '<nav class="col-12 navigation recipe-archive__pagination" aria-label="' . esc_attr__( 'Recipes pagination', 'dwm-lnb' ) . '">';
+					echo wp_kses_post(
+						paginate_links(
+							array(
+								'total'     => $recipes_query->max_num_pages,
+								'current'   => $paged,
+								'prev_text' => '&laquo; ' . __( 'Previous', 'dwm-lnb' ),
+								'next_text' => __( 'Next', 'dwm-lnb' ) . ' &raquo;',
+								'type'      => 'list',
+							)
+						)
+					);
+					echo '</nav>';
+				}
+				?>
 			</div>
 		</div>
 	</section>
