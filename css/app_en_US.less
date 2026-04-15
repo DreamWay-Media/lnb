@@ -1,0 +1,637 @@
+/* FONTS */
+@font-face {
+  font-family: 'Calibre-Thin';
+  src: url('../fonts/Calibre-Thin.eot');
+  src: url('../fonts/Calibre-Thin.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/Calibre-Thin.svg#Calibre-Thin') format('svg'),
+  url('../fonts/Calibre-Thin.ttf') format('truetype'),
+  url('../fonts/Calibre-Thin.woff') format('woff'),
+  url('../fonts/Calibre-Thin.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Calibre-Light';
+  src: url('../fonts/Calibre-Light.eot');
+  src: url('../fonts/Calibre-Light.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/Calibre-Light.svg#Calibre-Light') format('svg'),
+  url('../fonts/Calibre-Light.ttf') format('truetype'),
+  url('../fonts/Calibre-Light.woff') format('woff'),
+  url('../fonts/Calibre-Light.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Calibre';
+  src: url('../fonts/Calibre-Regular.eot');
+  src: url('../fonts/Calibre-Regular.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/Calibre-Regular.woff2') format('woff2'),
+  url('../fonts/Calibre-Regular.woff') format('woff'),
+  url('../fonts/Calibre-Regular.ttf') format('truetype'),
+  url('../fonts/Calibre-Regular.svg#Calibre-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Calibre-Bold';
+  src: url('../fonts/Calibre-Bold.eot');
+  src: url('../fonts/Calibre-Bold.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/Calibre-Bold.svg#Calibre-Bold') format('svg'),
+  url('../fonts/Calibre-Bold.ttf') format('truetype'),
+  url('../fonts/Calibre-Bold.woff') format('woff'),
+  url('../fonts/Calibre-Bold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+.cTF{
+  font-family: 'Calibre-Thin', Arial;
+}
+.cLF{
+  font-family: 'Calibre-Light', Arial;
+}
+.cF{
+  font-family: 'Calibre', Arial;
+}
+.cBF{
+  font-family: 'Calibre-Bold', Arial;
+}
+
+h1,h2,h3,h4,h5,h6{
+  .cBF;
+}
+
+@import "app.less";
+
+body {
+  .cF;
+  header{
+    .header-top-bar{
+      .short-desc {
+        font-size: 17px;
+        letter-spacing: 0.6px;
+      }
+      ul{
+        li{
+          a{
+            .cBF;
+            font-size: 21px;
+          }
+        }
+      }
+    }
+    .header-bottom-bar {
+      .name {
+        font-size: 39px;
+        line-height: 35px;
+        span {
+          font-size: 25px;
+          .cF;
+        }
+        @media @medium{
+          font-size: 29px;
+          span{
+            font-size: 20px;
+          }
+        }
+        @media @small{
+          font-size: 29px;
+          span{
+            font-size: 20px;
+          }
+        }
+      }
+      .menu-primary-menu-container{
+        ul{
+          li{
+            a{
+              text-transform: uppercase;
+              .cF;
+              @media @xlarge{
+                margin-left: 58px;
+                font-size: 20px;
+              }
+              @media @large{
+                margin-left: 18px;
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+      .off-canvas{
+        h1{
+          @media @medium{
+            font-size: 29px;
+            span{
+              font-size: 20px;
+            }
+          }
+          @media @small{
+            font-size: 29px;
+            span{
+              font-size: 20px;
+            }
+          }
+        }
+        ul{
+          li{
+            a{
+              font-size: 20px;
+              .cBF;
+            }
+          }
+        }
+      }
+    }
+  }
+  section{
+    #breadcrumbs{
+      .cLf;
+      font-size: 18px;
+    }
+    h1.page-title{
+      font-size: 38px;
+    }
+  }
+  footer{
+    h1{
+      font-size: 39px;
+      span{
+        .cF;
+        font-size: 25px;
+      }
+    }
+    ul.menu{
+      li{
+        a{
+          text-transform: uppercase;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  /* Home */
+  &.home{
+    section{
+      .segment{
+        &#upcomings{
+          .box{
+            @media @xlarge{
+              font-size: 27px;
+            }
+            @media @large{
+              font-size: 27px;
+            }
+            @media @medium{
+              font-size: 20px;
+            }
+            @media @small{
+              font-size: 16px;
+            }
+            .fair-date{
+              .dm{
+                .cF;
+              }
+              .y{
+                .cBF;
+              }
+            }
+            .fair-location{
+              .cTF;
+            }
+            .fair-title{
+              .cBF;
+            }
+          }
+          .btn{
+            font-size: 29px;
+          }
+        }
+        &#about{
+          h1{
+            text-transform: uppercase;
+          }
+          p{
+            text-align: justify;
+          }
+          @media @xlarge{
+            h2{
+              font-size: 50px;
+            }
+            h1{
+              font-size: 7.56vw;
+            }
+            p{
+              font-size: 25px;
+              line-height: 30px;
+            }
+          }
+          @media @large{
+            h2{
+              font-size: 50px;
+            }
+            h1{
+              font-size: 7.56vw;
+            }
+            p{
+              font-size: 25px;
+              line-height: 30px;
+            }
+          }
+          @media @medium{
+            h2{
+              font-size: 40px;
+            }
+            h1{
+              font-size: 60px;
+            }
+            p{
+              font-size: 25px;
+              line-height: 30px;
+            }
+          }
+          @media @small{
+            h2{
+              font-size: 30px;
+            }
+            h1{
+              font-size: 35px;
+            }
+            p{
+              font-size: 25px;
+              line-height: 30px;
+            }
+          }
+        }
+        &#locations{
+          .location{
+            .box{
+              .text{
+                font-size: 25px;
+                line-height: 30px;
+              }
+              .link{
+                a{
+                  line-height: 55px;
+                  font-size: 29px;
+                  font-weight: 700;
+                }
+              }
+            }
+          }
+        }
+        &#why{
+          h2{
+            font-size: 50px;
+          }
+          @media @xlarge{
+            .title{
+              h3{
+                font-size: 46px;
+              }
+            }
+            .text{
+              font-size: 31px;
+              line-height: 46px;
+            }
+          }
+          @media @large{
+            .title{
+              h3{
+                font-size: 33px;
+              }
+            }
+            .text{
+              font-size: 27px;
+              line-height: 30px;
+            }
+          }
+          @media @medium{
+            .title{
+              h3{
+                font-size: 33px;
+              }
+            }
+            .text{
+              font-size: 27px;
+              line-height: 30px;
+            }
+          }
+          @media @small{
+            .title{
+              h3{
+                font-size: 25px;
+              }
+            }
+            .text{
+              font-size: 25px;
+            }
+          }
+        }
+        &#news{
+          h2{
+            font-size: 50px;
+            span{
+              .cF;
+              font-size: 21px;
+            }
+          }
+          @media @xlarge{
+            .title{
+              h3{
+                font-size: 38px;
+              }
+              a{
+                font-size: 22px;
+              }
+            }
+            button{
+              font-size: 32px;
+            }
+          }
+          @media @large{
+            .title{
+              h3{
+                font-size: 34px;
+              }
+              a{
+                font-size: 22px;
+              }
+            }
+            button{
+              font-size: 28px;
+            }
+          }
+          @media @medium{
+            .title{
+              h3{
+                font-size: 30px;
+              }
+              a{
+                font-size: 20px;
+              }
+            }
+            button{
+              font-size: 22px;
+            }
+          }
+          @media @small{
+            .title{
+              h3{
+                font-size: 22px;
+              }
+              a{
+                font-size: 20px;
+              }
+            }
+            button{
+              font-size: 22px;
+            }
+          }
+        }
+        &#contact{
+          @media @xlarge{
+            h2{
+              font-size: 50px;
+            }
+            h3{
+              font-size: 30px;
+              &.address{
+                margin-top: 18px;
+                margin-bottom: 20px;
+              }
+              &.telephone{
+                margin-top: 50px;
+              }
+              &.email{
+                margin-top: 50px;
+              }
+            }
+            p{
+              font-size: 22px;
+            }
+          }
+          @media @large{
+            h2{
+              font-size: 50px;
+            }
+            h3{
+              font-size: 30px;
+              &.address{
+                margin-top: 18px;
+                margin-bottom: 20px;
+              }
+              &.telephone{
+                margin-top: 50px;
+              }
+              &.email{
+                margin-top: 50px;
+              }
+            }
+            p{
+              font-size: 22px;
+            }
+          }
+          @media @medium{
+            h2{
+              font-size: 50px;
+            }
+            h3{
+              font-size: 30px;
+              &.address{
+                margin-top: 18px;
+                margin-bottom: 20px;
+              }
+              &.telephone{
+                margin-top: 50px;
+              }
+              &.email{
+                margin-top: 50px;
+              }
+            }
+            p{
+              font-size: 22px;
+            }
+          }
+          @media @small{
+            h2{
+              font-size: 50px;
+            }
+            h3{
+              font-size: 30px;
+              &.address{
+                margin-top: 18px;
+                margin-bottom: 20px;
+              }
+              &.telephone{
+                margin-top: 50px;
+              }
+              &.email{
+                margin-top: 50px;
+              }
+            }
+            p{
+              font-size: 22px;
+            }
+          }
+        }
+      }
+    }
+  }
+  /* Archive */
+  &.archive{
+    section{
+      .cell-inner{
+        .box{
+          h2{
+            font-size: 25px;
+          }
+        }
+        .excerpt{
+          .cLF;
+          font-size: 22px;
+          a{
+            .cBF;
+            font-size: 25px;
+          }
+        }
+      }
+    }
+  }
+  /* Single */
+  &.single{
+    h2{
+      font-size: 46px;
+      .cBF;
+    }
+    .excerpt{
+      font-size: 25px;
+      .cLF;
+      font-weight: 600;
+    }
+    .text{
+      .cLF;
+      font-size: 25px;
+      line-height: 36px;
+    }
+    .details{
+      h4{
+        .cLF;
+        font-size: 29px;
+        font-weight: 600;
+      }
+      span{
+        font-size: 29px;
+        .cLF;
+      }
+      a.doc{
+        .cLF;
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
+  }
+  /* Page */
+  &.page{
+    h2{
+      font-size: 46px;
+      .cBF;
+    }
+    .excerpt{
+      font-size: 25px;
+      .cLF;
+      font-weight: 600;
+    }
+    .text{
+      .cLF;
+      font-size: 25px;
+      line-height: 36px;
+      .wpcf7{
+        label{
+          font-size: 25px;
+        }
+      }
+    }
+  }
+  /* Taxonomy */
+  &.tax-location{
+    .location-text{
+      .text,p{
+        .cLF;
+        font-size: 25px;
+      }
+      .nivo-caption{
+        font-size: 25px;
+      }
+      .nivo-directionNav a{
+        .cLF;
+        &:hover{
+          font-weight: 600;
+        }
+      }
+    }
+    @media @xlarge{
+      .location-cover{
+        h1{
+          font-size: 112px;
+          line-height: 900px;
+        }
+      }
+      .location-text{
+        .nivo-directionNav a{
+          font-size: 33px;
+        }
+        h2{
+          font-size: 97px;
+          line-height: 1;
+          &.name{
+            font-size: 112px;
+          }
+        }
+      }
+    }
+    @media @large{
+      .location-cover{
+        h1{
+          font-size: 80px;
+          line-height: 600px;
+        }
+      }
+      .location-text{
+        .nivo-directionNav a{
+          font-size: 30px;
+        }
+        h2{
+          font-size: 60px;
+        }
+      }
+    }
+    @media @medium{
+      .location-cover{
+        h1{
+          font-size: 60px;
+          line-height: 400px;
+        }
+      }
+      .location-text{
+        h2{
+          font-size: 40px;
+        }
+      }
+    }
+    @media @small{
+      .location-cover{
+        h1{
+          font-size: 30px;
+          line-height: 150px;
+        }
+      }
+      .location-text{
+        h2{
+          font-size: 25px;
+        }
+      }
+    }
+  }
+}

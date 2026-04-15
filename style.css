@@ -1,0 +1,14 @@
+/*
+Theme Name: DreamWay Media Theme
+*/
+
+.single_custm_title{
+    text-align: center !important;
+    padding: 60px 0 !important;
+    color: #000 !important;
+}
+
+.product div.images {
+    float: left;
+    width: 92% !important;
+}
